@@ -26,28 +26,26 @@ type ContextType = {
 
 const TicketContext = createContext<ContextType | undefined>(undefined);
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function TicketProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [user, setUser] = useState<User>(() => {
+    if (typeof window === "undefined") return null;
     const token = localStorage.getItem("ticketapp_session");
     return token ? { email: "user@example.com", token } : null;
   });
 
-  const [tickets, setTickets] = useState<Ticket[]>(() => {
-    try {
-      const saved = localStorage.getItem("tickets");
-      return saved ? JSON.parse(saved) : [];
-    } catch {
-      return [];
-    }
-  });
-
+  const [tickets, setTickets] = useState<Ticket[]>([]);
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
 
-  // Sync tickets to localStorage when they change
+  // ✅ Sync tickets to localStorage when they change
   useEffect(() => {
+    if (typeof window === "undefined") return;
     localStorage.setItem("tickets", JSON.stringify(tickets));
   }, [tickets]);
 
@@ -59,7 +57,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const login = (email: string, password: string) => {
     if (email && password.length >= 6) {
       const token = btoa(`${email}:${Date.now()}`);
-      localStorage.setItem("ticketapp_session", token);
+      if (typeof window !== "undefined")
+        localStorage.setItem("ticketapp_session", token);
       setUser({ email, token });
       return true;
     }
@@ -69,7 +68,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   const signup = (email: string, password: string) => login(email, password);
 
   const logout = () => {
-    localStorage.removeItem("ticketapp_session");
+    if (typeof window !== "undefined")
+      localStorage.removeItem("ticketapp_session");
     setUser(null);
   };
 
@@ -96,5 +96,3 @@ export const useTicket = () => {
   if (!ctx) throw new Error("useTicket must be used within TicketProvider");
   return ctx;
 };
-
-export type { Ticket as TicketType };
