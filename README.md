@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎟️ TicketFlow — Modern Ticket Management App
 
-## Getting Started
+TicketFlow is a lightweight, local-first ticket management application built with **React**, **Next.js (App Router)**, and **Tailwind CSS**.
+It features a clean interface, animated transitions, offline persistence, and an intuitive workflow for creating, editing, and tracking support tickets — all in the browser.
 
-First, run the development server:
+---
+
+## 🚀 Features
+
+- **Landing Page** — Hero section with CTA, features overview, and gradient visuals.
+- **Authentication (Mocked)** — Local storage–based signup/login (no backend required).
+- **Dashboard** — Summaries of ticket stats: total, open, in-progress, closed.
+- **Ticket Management** — Create, edit, delete, and filter tickets in real time.
+- **Persistent Storage** — Tickets and sessions are stored in `localStorage`.
+- **Animated UI** — Smooth transitions powered by **Framer Motion**.
+- **Toast Notifications** — Non-blocking feedback for all user actions.
+- **Responsive Design** — Fully responsive with Tailwind CSS utilities.
+- **Zero Config** — Runs directly as a Next.js client component — no backend setup needed.
+
+---
+
+## 🧠 Tech Stack
+
+| Layer        | Technology                            | Purpose                            |
+| ------------ | ------------------------------------- | ---------------------------------- |
+| UI           | React 18 + Next.js (App Router)       | Component architecture and routing |
+| Styling      | Tailwind CSS                          | Utility-first styling              |
+| Animation    | Framer Motion                         | Page and component transitions     |
+| State        | React Hooks (`useState`, `useEffect`) | Component-level logic              |
+| Persistence  | `localStorage`                        | Offline and session data           |
+| Build/Deploy | Next.js / Vercel or any Node host     | Simple static or hybrid hosting    |
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone the repository
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/codabytez/ticketflow-react.git
+cd ticketflow-react
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2️⃣ Install dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Using **pnpm** (recommended):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm install
+```
 
-## Learn More
+Or with npm/yarn:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+# or
+yarn install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3️⃣ Run the development server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev
+```
 
-## Deploy on Vercel
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🧭 Navigation Flow
+
+| Page                  | Description                              |
+| --------------------- | ---------------------------------------- |
+| **Landing Page**      | Entry screen with app intro and CTAs     |
+| **Login / Signup**    | Mock authentication (localStorage token) |
+| **Dashboard**         | Displays ticket stats and quick actions  |
+| **Ticket Management** | CRUD operations for tickets              |
+
+Navigation is handled via in-component state (`currentPage`) instead of router routes.
+
+---
+
+## 💾 Data Persistence
+
+- **User Session** — Stored in `localStorage` as `ticketapp_session`.
+- **Tickets** — Stored in `localStorage` as `tickets` (array of objects).
+- Data automatically syncs when you add/edit/delete tickets.
+
+---
+
+## 🧩 Component Overview
+
+| Component          | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `TicketApp`        | Root component that controls navigation and state |
+| `LandingPage`      | Marketing hero + feature grid                     |
+| `AuthPage`         | Login and signup screens                          |
+| `Dashboard`        | Ticket summaries and stats                        |
+| `TicketManagement` | Full CRUD interface                               |
+| `Toast`            | Temporary notification popup                      |
+
+---
+
+## ✨ UI Design Notes
+
+- **Color scheme**: Indigo/Blue gradients for modern appeal
+- **Rounded cards** and **soft shadows** for clean aesthetic
+- **Motion-based transitions** using `AnimatePresence`
+- **Responsive grid layouts** for tickets and stats cards
+
+---
+
+### 🧩 Demo Accounts
+
+For testing, you can log in with any email/password combination (minimum 6 chars).
+
+Example:
+
+```JavaScript
+Email: test@example.com
+Password: 123456
+```
+
+---
